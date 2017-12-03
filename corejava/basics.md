@@ -45,5 +45,46 @@ System.out.println(x);
 double a = 2;
 double y = Math.pow(x, a);
 ```
+Some math functions in class **Math**:
+```java
+Math.sin
+Math.cos
+Math.tan
+Math.atan
+Math.atan2
+
+Math.exp
+Math.log
+Math.log10
+
+Math.PI
+Math.E
+```
+
+### conversions between numeric types
+When two values are combined with a binary operator, follow the below rules
+1. if either of the operands is of type **double**, the other one will be converted to a **double**
+2. otherwise, if either of the operands is of type **float**, the other one will be converted to a **float**
+3. otherwise, if either of the operands is of type **long**, the other one will be converted to a **long**
+4. otherwise, both operands will be converted to an **int**
 
 
+
+### casts
+Use **cast** to do conversions in which loss of information is possible, for example
+```java
+double x = 9.997;
+int nx = (int) x;
+```
+
+Use **Math.round** method if wants to round a floating-point number to the nearest integer, for example
+```java
+double x = 9.997;
+int nx = (int) Math.round(x);
+```
+
+Note: you cannot cast between **boolean** values and any numeric type.
+
+### relational and boolean operators
+Use == to test for equility, use != for inequility.
+Use && for logical **and**, and || for logical **or"".
