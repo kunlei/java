@@ -30,3 +30,20 @@ In Java, one use the keyword **final** to denote a constant.
 
 ## Operators
 The usual arithmetic operators +, -, \*, / are used in Java for addition, subtraction, multiplication, and division.
+
+Note: the / operator denotes integer division if both arguments are integers, and floating-point division otherwise. Integer remainder (sometimes called modulus) is denoted by %. For example, 15 / 2 is 7, 15 % 2 is 1, and 15.0 / 2 is 7.5.
+
+Note: integer devision by 0 raises an exception, whearas floating-point division by 0 yields an infinite or NaN result.
+
+### mathematical functions and constants
+Use **Math** class for mathematical functions. For example
+```java
+double x = 4;
+x = Math.sqrt(x);
+System.out.println(x);
+
+double a = 2;
+double y = Math.pow(x, a);
+```
+
+
