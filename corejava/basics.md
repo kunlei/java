@@ -87,4 +87,160 @@ Note: you cannot cast between **boolean** values and any numeric type.
 
 ### relational and boolean operators
 Use == to test for equility, use != for inequility.
-Use && for logical **and**, and || for logical **or"".
+Use && for logical **and**, and || for logical **or**.
+
+
+### enumerated types
+```java
+enum Size {SMALL, MEDIUM, LARGE, EXTRA\_LARGE};
+Size s = Size.MEDIUM;
+```
+
+## Strings
+Java does not have a built-in string type. Instead, the standard Java library contains a predefined class called String. Each quoted string is an instance of the String class:
+```java
+String e = ""; //empty string
+String greeting = "Hello";
+```
+
+
+### substrings
+A substring can be extracted from a larger string using the **substring** method of the **String** class:
+```java
+String greeting = "Hello";
+String s = greeting.substring(0, 3); \\s = "Hel"
+```
+
+
+
+### concatenation
+Java allows you to use + to join two strings:
+```java
+String expletive = "Expletive";
+String PG13 = "deleted";
+String message = expletive + PG13;
+```
+
+Note: every Java object can be converted to a string.
+```java
+int age = 13;
+String rating = "PG" + age;
+```
+
+### strings are immutable
+
+
+### testing strings for equality
+Use **equals** method to test whether two strings are equal.
+```java
+s.equals(t);
+"Hello".equals(greeting);
+"Hello".equalsIgnoreCase("hello");
+```
+Note: do not use the == operator to test whether two strings are equal. It only determines whether or not the strings are stored in the same location. 
+
+
+### empty and null strings
+To test whether a string is empty: 
+```java
+if (str.length() == 0)
+if (str.equals(""))
+```
+
+To test whether a string is null:
+```java
+if (str == null)
+```
+
+To test that a string is neither null nor empty, use:
+```java
+if (str != null && str.length() != 0)
+```
+Note: you need to test that str is not null first.
+
+
+
+### building strings
+To build a string from many small pieces, use **StringBuilder**:
+```java
+StringBuilder builder = new StringBuilder();
+builder.append(ch); //append a single character
+builder.append(str); //append a string
+String completedSTring = builder.toString();
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
