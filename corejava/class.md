@@ -236,10 +236,28 @@ class Employee {
     }
 }
 ```
+In this example, the id field is initialized in the object initialization block, no matter which constructor is used to construct an object. The initialization block runs first, and then the body of the constructor is executed.
 
 
+Detailed steps when a constructor is called:
+1. All data fields are initialized to their default values (0, false, or null).
+2. All field initializers and initliazaiton blocks are executed, in the order in which they occur in the class declaration.
+3. If the first line of the constructor calls a second constructor, then the body of the second constructor is executed.
+4. The body of the constructor is executed.
 
 
+To initialize a static field, either supply an initial value or use a static initialization block. In the first mechanism:
+```java
+private static int nextId = 1;
+```
+If the static fields of your class require complex initialization code, use a static initialization block. Place the code inside a block and tag it with the keyword static. For example
+```java
+static {
+    Random generator = new Random();
+    nextId = generator.nextInt(10000);
+}
+```
+Static initialization occurs when the class is first loaded. Like instance fields, static fields are 0, false, or null unless you explicitly set them to another value.
 
 
 
