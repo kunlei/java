@@ -144,15 +144,98 @@ Summary of what you can and cannot do with method parameters in Java:
 
 
 
+## Overloading
+The method name and its parameters are called the signature of the method.
+Note: the return type is not part of the method signature. That is, you cannot have two methods with the same names and parameter types but different return types.
+
+
+## Default field initialization
+If you don't set a field explicitly in a constructor, it is automatically set to a default value: numbers to 0, boolean values to false, and object references to null.
+Note: there is an important difference between fields and local variables. You must always explicitly initialize local variables in a method. But in a class, if you don't initialize a field, it is automatically initialized to a default (0, false or null).
 
 
 
+## The constructor with no arguments
+If you write a class with no constructors whatsoever, then a non-argument constructor is provided for you. This constructor sets all the instance fields to their default values. So, all numeric data contained in the instance fields would be 0, all boolean values would be false, and all object variables would be set to null.
+
+If a class supplies at least one constructor but does not supply a no-argument constructor, it is illegal to construct objects without supplying arguments. 
+
+Note: keep in mind that you get a free no-argument constructor **only** when your class has no other constructors. If you write your class with even a single constructor of your own and you want the users of your class to have the ability to create an instance by a call to
+```java
+new ClassName()
+```
+then you must provide a no-argument constructor. Of course, if you are happy with the default values for all fields, you can simply supply
+```java
+public ClassName {
+
+}
+```
+
+## Explicit field initialization
+One can simply assign a value to any field in the class definition. For example,
+```java
+class Employee {
+    private String name = "";
+}
+```
+This assignment is carried out before the constructor executes. The initialization value doesn't have to be a constant value. For example:
+```java
+class Employee {
+    private static int nextId;
+    private int id = assignId();
+
+    private static int assignId() {
+        int r = nextId;
+        nextId++;
+        return r;
+    }
+}
+```
 
 
+## Calling another constructor
+The keyword **this** refers to the implicit parameter of a method. However, this keyword has a second meaning.
+If the first statement of a constructor has the form this(...), then the constructor calls another constructor of the same class. Here is a typical example:
+```java
+pulic Employee(double s) {
+    this("Employee #" + nextId, s);
+    nextId;
+}
+```
+Note: in C++, it is not possible for one constructor to call another.
 
+## Initialization blocks
+There are three ways to initialize a data field:
+1. by setting a value in a constructor
+2. by assigning a value in the declaration
+3. by using an initialization block.
 
+In the thrid method, class declarations can contain arbitrary blocks of code. These blocks are executed whenever an object of that class is constructed. For example:
+```java
+class Employee {
+    private static int nextId;
 
+    private int id;
+    private String name;
+    private double salary;
 
+    //object initialization block
+    {
+        id = nextId;
+        nextId++;
+    }
+
+    public Employee(String n, double s) {
+        name = n;
+        salary = s;
+    }
+
+    pulic Employee() {
+        name = "";
+        salary = 0;
+    }
+}
+```
 
 
 
