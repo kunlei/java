@@ -74,6 +74,89 @@ This works in C++, but not in Java.
 
 
 ## Final instance fields
+One can define an instance field as **final**. Such a field must be initialized when the object is constructed. That is, one must guarantee that the field value has been set after the end of every constructor. Afterwards, the field may not be modified again.
+```java
+class Employee {
+    private final String name;
+}
+```
+The **final** modifier is particularly useful for fields whose type is primitive or an immutable class.
+For mutable class, the **final** modifier can be confusing. For example, consider a field
+```java
+private final StringBuilder evaluations;
+```
+that is initialized in the Employee constructor as
+```java
+evaluations = new StringBuilder();
+```
+The final keyword merely means that the object reference stored in the evaluations variable will never again refer to a different StringBuilder object. But the object can be mutated:
+```java
+public void giveGoldStar() {
+    evaluations.append(LocalDate.now() + ": Gold star!\n");
+}
+```
+
+
+## Static fields and methods
+### Static fields
+If one defines a field as **static**, then there is only one such field per class. In contrast, each object has its own copy of all instance fields. For example, let's suppose we want to assign a unique identificiation number to each employee. Wee add an instance field id and a static field enxtId to the employee class:
+```java
+class Employee {
+    private static int nextId = 1;
+
+    private int id;
+}
+```
+
+### static constants
+Example:
+```java
+public class Math {
+    public static final double PI = 3.1415;
+}
+```
+
+### static methods
+Static methods are methods that do not operate on objects.
+
+### main methods
+Every class can have a main method.
+
+
+## Method Parameters
+Java **always** uses call by value. That means that the method gets a copy of all parameter values. In particular, the methods cannot modify the contents of any paramter variables passed to it.
+
+There are, however, two kinds of method parameters:
+1. Primitive types (numbers, boolean values)
+2. Object references
+It is impossible for a method to change a primitive type parameter. The situation is different for object parameters. One can easily implement a method that triples the salary of an employee:
+```java
+public static void tripleSalary(Employee x) {
+    x.raiseSalary(200);
+}
+```
+Object references are passed by value.
+
+Summary of what you can and cannot do with method parameters in Java:
+1. A method cannot modify a parameter of a primitive type (that is, numbers of boolean values)
+2. A method can change the state of an object parameter
+3. A method cannot make an object parameter refer to a new object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
