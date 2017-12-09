@@ -1,6 +1,6 @@
 ## classes, Superclasses, and Subclasses
 ### defining subclasses
-The example below shows how one defines a <@code Manager> class 
+The example below shows how one defines a `Manager` class 
 Use **extends** to denote inheritance:
 ```java
 public class Manager extends Employee {
