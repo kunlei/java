@@ -1,25 +1,48 @@
 ## classes, Superclasses, and Subclasses
+
+
 ### defining subclasses
-The example below shows how one defines a `Manager` class 
-Use **extends** to denote inheritance:
+The example below shows how one defines a `Manager` class that inherits from the `Employee` class. Use **extends** to denote inheritance:
 ```java
 public class Manager extends Employee {
+    private double bonus;
+    ...
+    public void setBonus(double bonus) {
+        this.bonus = bonus;
+    }
 }
+
+
+Manager boss = ...;
+boss.setBonus(5000);
 ```
 Note: All inheritance in Java is public inheritance; there is no analog to the C++ features of private and protected inehritance.
 
+
+
+
+
 ### overriding methods
-Class Manager also has a getSalary() method that overrides the Employee method:
+Some of the superclass methods are not appropriate for the `Manager` subclass. In particular, the `getSalary` method should return the sum of the base salary and the bonus. One need to supply a new method to override the superclass method:
 ```java
 public class Manager extends Employee {
     ...
+    public double getSalary() {
+        return salary + bonus; //won't work
+    }
+
     public double getSalary() {
         double baseSalary = super.getSalary();
         return baseSalary + bonus;
     }
 }
 ```
+Note: the subclass cannot directly call the `salary` field since it is declared as `private` in the superclass and only the `Employee` methods have direct access to the private fields of the `Employee` class. This means that the `getSalary` method of the `Manager` class cannot directly access the `salary` field.
 Note: **super** is not a reference to an object. For example, you cannot assign the value **super** to another object variable. Instead, **super** is a special keyword that directs the compiler to invoke the superclass method.
+
+
+
+
 
 
 
@@ -29,6 +52,25 @@ A subclass constructor looks like this:
 public Manager(String name, double salary, int year, int month, int day) {
     super(name, salary, year, month, day);
     bonus = 0;
+}
+```
+Since the `Manager` constructor cannot access the private fields of the `Employee` class, it must initialize them through a constructor. The call using `super` must be the first statement in the constructor for the subclass.
+
+Note: if the subclass constructor does not call a superclass constructor explicitly, the no-argument constructor of the superclass is invoked. If the superclass does not have a no-argument constructor and the subclass constructor does not call another superclass constructor explicitly, the Java compiler reports an error.
+
+
+An example:
+```java
+Manager boss = new Manager("Carl Cracker", 80000, 1987, 12, 15);
+boss.setBonus(5000);
+
+Employee[] staff = new Employee[3];
+staff[0] = boss;
+staff[1] = new Employee("Harry Hacker", 50000, 1989, 10, 1);
+staff[2] = new Employee("Tony Tester", 40000, 1990, 3, 15);
+
+for (Employee e : staff) {
+    System.out.println(e.getName() + " " + e.getSalary());
 }
 ```
 
@@ -44,6 +86,11 @@ e = new Employee(...);
 e = new Manager(...);
 ```
 In Java, object variables are polymorphic. A variable of type Employee can refer to an object of type Employee or to an object of any subclass of the Employee class. However, one cannot assign a superclass reference to a subclass variable. 
+
+
+
+
+
 
 ### preventing inheritance
 Use **final** to prevent someone from forming a subclass.
@@ -62,4 +109,59 @@ public class Employee {
 ```
 
 Note: recall that fields can also be declared as final. A final field cannot be changed after the object has been constructed. However, if a class is declared as final, only the methods, not the fields, are automatically final.
+
+
+
+
+### Abstrat class
+A class with one or more abstract methods must iteself be declared abstract.
+```java
+public abstract class Person {A
+    private String name;
+    
+    public Person (String name) {
+        this.name = name;
+    }
+
+    public abstract String getDescription();
+
+    public String getName() {
+        return name;
+    }
+}
+```
+In addition to abstract methods, abstract classes can have fields and concrete methods. See above example.
+
+When one extends an abstract class, there are two choices: one can leave some or all of the abstract methods undefined, then one must tag the subclass as abstract as well. Or one can define all methods, and the subclass is no longer abstract.
+
+A class can even be declared as `abstract` though it has no abstract methods.
+
+Abstract classes cannot be instantiated.
+
+Note that one can still create object variables of an abstract class, but such a varaible must refer to an object of a nonabstract subclass. For example
+```java
+Person p = new Student("Vince Wu", "Economics");
+```
+Here `p` is a variable of the abstract type `Person` that refers to an instance of the nonabstract subclass `Student`.
+
+
+### Protected classes
+Summary of the four access modifiers in Java that controls visibility:
+1. Visible to the class only (private).
+2. Visible to the world (public).
+3. Visible to the package and all subclasses (protected).
+4. Visible to the package - the (unfortunate) default. No modifiers are needed.
+
+
+
+
+
+
+
+## Object: the cosmic superclass
+
+
+
+
+
 
