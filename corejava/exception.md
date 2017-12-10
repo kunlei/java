@@ -32,3 +32,40 @@ The rule "If it is a `RuntimeException`, it was your fault" works pretty well.
 
 
 Java calls any exception that derives from the class `Error` or the class `RuntimeException` an `unchecked` exception. All other exceptions are called `checked` exceptions. The compiler checks that you provide exception handlers for all checked exceptions.
+
+
+In summary, a method must declare all the checked exceptions that it might throw. Unchecked exceptions are either beyond your control (Error) or result from conditions that you should not have allowed in the first place (RuntimeException). If your methods fails to faithfully declare all checked exceptions, the compiler will issue an error message. Of course, instead of declaring the exception, you can also catch it. Then the exception won't be thrown out of the method, and no `throws` specifications is necessary. 
+
+
+
+### creating exception classes
+To create new exception classes, just derive it from `Exception`, or from a child class of `Exception` such as `IOException`. It is customary to give both a default constructor and a constructor that contains a detailed message. For example:
+```java
+class FileFormatException extends IOException {
+    public FileFormatException() {}
+    public FileFormatException(String gripe) {
+        super(gripe);
+    }
+}
+```
+Now you are ready to throw your very own exception type.
+```java
+String readData(BufferedReader in) throws FileFormatException {
+    ...
+    while (...)
+        if (ch == -1) {
+            if (n < len) {
+                throw new FileFormatException();
+            }
+        }
+        ...
+    }
+}
+```
+
+
+Note: if you are writing a method that overrides a superclass method which throws no exceptons, then you must catch each checked exception in the method's code. You are not allowed to add more throws specifiers to a subclass method than are present in the superclass method.
+
+
+
+
