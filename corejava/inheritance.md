@@ -113,7 +113,7 @@ Note: recall that fields can also be declared as final. A final field cannot be 
 
 
 
-### Abstrat class
+### Abstract class
 A class with one or more abstract methods must iteself be declared abstract.
 ```java
 public abstract class Person {A
@@ -159,7 +159,45 @@ Summary of the four access modifiers in Java that controls visibility:
 
 
 ## Object: the cosmic superclass
+The `Object` class is the ultimate ancestor - every class in Java extends `Object`. You can use a variable of type `Object` to refer to objects of any type:
+```java
+Object obj = new Employee("Harry Hacker", 35000);
+```
+Of course, a variable of `Object` is only useful as a generic holder for arbitrary values. To do anything specific with the value, you need to have some knowledge about the original type and apply a cast:
+```java
+Employee e = (Employee) obj;
+```
+In Java, only the values of primitive types (numbers, characters, and boolean values) are not objects.
 
+All array types, no matter whether they are arrays of objects or arrays of primitive types, are class types that extend the `Object` class.
+```java
+Employee[] staff = new Employee[10];
+obj = staff; //ok
+obj = new int[10]; //ok
+```
+### The `equals` method
+The `equals` method in the `Object` class tests whether one object is considered equal to another.
+```java
+public class Employee {
+    ...
+    public boolean equals (Object otherObject) {
+
+        //a quick test to see if the objects are idential
+        if (this == otherObject) return true;
+
+        //must return false if the explicit parameter is null
+        if (otherObject == null) return false;
+
+        //if the classes don't match, they can't be equal
+        if (getClass() != otherObject.getClass())  return false;
+
+        //test whether the fields have identical values
+        return name.equals(other.name) && 
+            salary == other.salary &&
+            hireDay.equals(other.hireDay);
+    }
+}
+```
 
 
 
