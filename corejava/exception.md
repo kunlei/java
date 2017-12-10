@@ -2,8 +2,10 @@ Java allows every method an alternative exit path if it is unable to complete it
 
 ## The classification of exceptions
 In Java, an exception object is always an instance of a class derived from **Throwable**. The exception hierarchy in Java:
+```
 *. Throwable
 1. Error
 2. Exception
    2.1 IOException
    2.2 Runtime Exception
+```
